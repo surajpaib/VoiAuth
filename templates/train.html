@@ -3,12 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+<style type="text/css">
+    body{
+        align-content: center;
+        padding: 100px 100px 100px 100px;
+    }
+    #submit-btn{
+        size: 20px;
+    }
 
+</style>
 </head>
 <body>
-<form action={% url 'train' %} method="POST">{% csrf_token %}
-{{ form }}
-    <button type="submit">Train</button>
+<form action={% url 'train' %} method="POST" class="formclass" id="mainform" enctype="multipart/form-data">{% csrf_token %}
+{{ form.as_p }}
+    <button type="submit" class="btn" id="submit-btn">Train</button>
+    <br/>
+    <p>Please upload an .wav audio file recorder with <a href="http://vocaroo.com">http://vocaroo.com/</a></p>
 </form>
 </body>
 </html>

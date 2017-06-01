@@ -15,15 +15,18 @@ def input(request):
 
 def train(request):
     if request.method == 'POST':
-        form = SpeakerForm(request.POST)
+        form = SpeakerForm(request.POST, request.FILES)
         if form.is_valid():
             name_val = form.cleaned_data['name']
-            sample = form.cleaned_data['sample']
+            sample = request.FILES['audio']
             s = SpeakerModel()
             s.name = name_val
             s.sample = sample
             s.save()
             return HttpResponse('Train successful')
+        else:
+            s = SpeakerForm()
+            render(request, 'train.html', {'form': s})
 
     else:
         s = SpeakerForm()

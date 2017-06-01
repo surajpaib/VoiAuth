@@ -5,4 +5,4 @@ from django import forms
 class SpeakerForm(forms.ModelForm):
     class Meta:
         model = SpeakerModel
-        fields = ('name','sample',)
+        fields = ('name','audio',)
