@@ -58,6 +58,8 @@ def result(request):
                 st = "Match"
             else:
                 st = "No Match"
+
+            person_true = SpeakerModel.objects.get(label= pred)
         else:
             list = SpeakerModel.objects.all()
             auth = AuthForm()
@@ -66,4 +68,4 @@ def result(request):
         list = SpeakerModel.objects.all()
         auth = AuthForm()
         return render(request, 'authenticate.html', {'form': auth, 'items': list})
-    return HttpResponse(st + '\n Confidence Score:\t'+ str(conf) + str(pred) + str(label))
+    return HttpResponse(st + '\n Confidence Score:\t'+ str(conf))
