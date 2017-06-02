@@ -34,20 +34,28 @@ class ModuleML(object):
         train_y = np.append(train_y, y, axis=0)
         self.train_x = train_x
         self.train_y = train_y
-        dump(train_x, open('pickled_data/train_x', "w"))
-        dump(train_y, open('pickled_data/train_y', "w"))
-        dump(class_values, open('pickled_data/class', "w"))
+        dump(train_x, open('authentication/pickled_data/train_x', "w"))
+        dump(train_y, open('authentication/pickled_data/train_y', "w"))
+        dump(class_values, open('authentication/pickled_data/class', "w"))
         return train_x, train_y, int(class_values[-1])
 
     def svm_run(self):
         model = svm.SVC()
         model.fit(self.train_x, self.train_y)
         self.model = model
+        dump(model, open('authentication/pickled_data/model', "w"))
+
 
     def predict(self, filepath):
+        model = load(open('authentication/pickled_data/model', "r"))
         test_vectors = self.get_mfcc_feature_vectors(filepath)
-        val = self.model.predict(test_vectors)
-        return val
+        val = model.predict(test_vectors)
+        (values, counts) = np.unique(val, return_counts=True)
+        label = values[np.argmax(counts)]
+        total = 0
+        for c in counts:
+            total += c
+        return val, total, label, counts, values
 
 
 

@@ -5,7 +5,7 @@ from django import forms
 class SpeakerForm(forms.ModelForm):
     class Meta:
         model = SpeakerModel
-        fields = ('name','audio','label')
+        fields = ('name','audio',)
 
 
 class AuthForm(forms.ModelForm):
