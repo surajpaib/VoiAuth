@@ -3,8 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        body{
+        align-content: center;
+        padding: 100px 100px 100px 100px;
+    }
+    #submit-btn{
+        size: 20px;
+    }
+        select{
+            padding-left: 40px;
+            padding-right: 40px;
+
+        }
+    </style>
 </head>
 <body>
+
+<form action={% url 'result' %} method="POST" class="formclass" id="mainform" enctype="multipart/form-data">{% csrf_token %}
+    Pick a User to Match the recording with:<br/><br/>
+    <select name="pick" id="select" >
+    {% for i in items %}
+        <option value={{ i.label }}>{{ i.name }}</option>
+        {% endfor %}
+    </select><br/><br/>
+{{ form.as_p }}<br/><br/>
+    <button type="submit" class="btn" id="submit-btn">Result</button>
+    <br/>
+    <p>Please upload an .wav audio file recorder with <a href="http://vocaroo.com">http://vocaroo.com/</a></p>
+</form>
 
 </body>
 </html>
