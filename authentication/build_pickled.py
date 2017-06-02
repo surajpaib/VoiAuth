@@ -6,8 +6,10 @@ import numpy as np
 model = ModuleML()
 
 
-class_1 = model.get_mfcc_feature_vectors('authentication/samples/surajaudio1.wav')
-class_2 = model.get_mfcc_feature_vectors('authentication/samples/nayanaudio1.wav')
+class_1 = model.get_mfcc_feature_vectors('authentication/samples/kunaltrain1.wav')
+class_1 = class_1[0:3000][:]
+class_2 = model.get_mfcc_feature_vectors('authentication/samples/kanthitrain1.wav')
+class_2 = class_2[0:3000][:]
 train_x = np.append(class_1, class_2, axis=0)
 train_y = np.append(np.full(np.shape(class_1)[0], 1), np.full(np.shape(class_2)[0], 2), axis=0)
 class_values = [2]

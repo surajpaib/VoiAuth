@@ -51,7 +51,7 @@ def result(request):
             val, total, pred, counts, values = model.predict(request.FILES['audio'])
             conf = 0
             for idx, value in enumerate(values):
-                if value == label:
+                if int(value) == label:
                     conf = counts[idx] / total
 
             if pred == label:
