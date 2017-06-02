@@ -22,7 +22,7 @@ def train(request):
             name_val = form.cleaned_data['name']
             model = ModuleML()
             train_x, train_y, label = model.train_model(request.FILES['audio'])
-            model.svm_run()
+            model.GBM_run()
             s = SpeakerModel()
             s.audio = 0
             s.name = name_val
@@ -48,12 +48,7 @@ def result(request):
         if form.is_valid():
             label = int(request.POST['pick'])
             model = ModuleML()
-            val, total, pred, counts, values = model.predict(request.FILES['audio'])
-            conf = 0
-            for idx, value in enumerate(values):
-                if int(value) == label:
-                    conf = counts[idx] / total
-
+            val, pred, conf = model.predict(request.FILES['audio'], label)
             if pred == label:
                 st = "Match"
             else:

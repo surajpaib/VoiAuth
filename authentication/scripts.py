@@ -48,23 +48,25 @@ class ModuleML(object):
         dump(class_values, open('authentication/pickled_data/class', "w"))
         return train_x, train_y, int(class_values[-1])
 
-    def svm_run(self):
-        model = GradientBoostingClassifier()
+    def GBM_run(self):
+        model = GradientBoostingClassifier(n_estimators=500, verbose=1)
         model.fit(self.train_x, self.train_y)
         self.model = model
         dump(model, open('authentication/pickled_data/model', "w"))
 
-
-    def predict(self, filepath):
+    def predict(self, filepath, actual):
         model = load(open('authentication/pickled_data/model', "r"))
         test_vectors = self.get_mfcc_feature_vectors(filepath)
         print np.shape(test_vectors)
+        test_y = np.full(np.shape(test_vectors)[0], actual)
         val = model.predict(test_vectors)
         print val
         (values, counts) = np.unique(val, return_counts=True)
         label = values[np.argmax(counts)]
+        confidence = model.score(test_vectors, test_y)
+        print confidence
         print label
-        total = 0
-        for c in counts:
-            total += c
-        return val, total, label, counts, values
+        return val, label, confidence
+
+
+
