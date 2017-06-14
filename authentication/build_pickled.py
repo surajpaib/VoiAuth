@@ -8,8 +8,7 @@ import os
 model = ModuleML()
 
 
-s3 = boto3.resource('s3', aws_access_key_id="AKIAJ5XB4OE2OH7TW5FA",
-                    aws_secret_access_key="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")
+s3 = boto3.resource('s3')
 bucket = s3.Bucket('voiauth')
 
 
