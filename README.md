@@ -19,7 +19,7 @@ Upload a voice clip and pick users stored in DB through drop-down to check if th
 MFCC is picked for speaker recognition as it helps pick features according to human hearing. 13 cepstrum coefficients are obtained.
 The speech signal is segmented into 40ms windows and MFCC coefficients are obtained for each window. Each window is used as a training sample to be passed to the SVM.
 SVC is used for multi-class classification with one-vs-one configuration.
-( Update: SVM was replaced with Gradient Boosting Classifier for quicker training and owing to major improvement in accuracy)
+( Update: SVM was replaced with Random Forest Classifier for quicker training and owing to major improvement in accuracy)
 
 
 For the testing procedure, the speech signal is broken down again into 40ms windows and majority voting is used to match the to the speaker

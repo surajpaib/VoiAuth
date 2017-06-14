@@ -4,22 +4,47 @@
     <meta charset="UTF-8">
     <title>Train</title>
 <style type="text/css">
-    body{
-        align-content: center;
-        padding: 100px 100px 100px 100px;
-    }
-    #submit-btn{
-        size: 20px;
-    }
+    input[type=file],input[type=text],select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=submit] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #45a049;
+}
+
+div {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 100px;
+}
 
 </style>
 </head>
 <body>
+<div>
 <form action={% url 'train' %} method="POST" class="formclass" id="mainform" enctype="multipart/form-data">{% csrf_token %}
 {{ form.as_p }}
-    <button type="submit" class="btn" id="submit-btn">Train</button>
+    <input type="submit" class="btn" id="submit-btn" name="Train"/>
     <br/>
     <p>Please upload an .wav audio file recorder with <a href="http://vocaroo.com">http://vocaroo.com/</a></p>
 </form>
+</div>
 </body>
 </html>

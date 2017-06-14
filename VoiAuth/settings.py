@@ -25,7 +25,7 @@ SECRET_KEY = 'q*u^fv0x8o0w3xad&xfd3kt6m_q3nq%qw)@v@9aux@_r@@ro3a'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [u'9891945a.ngrok.io']
+ALLOWED_HOSTS = [u'dbd926a0.ngrok.io', u'localhost']
 
 
 # Application definition
@@ -120,3 +120,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
+STATICFILES_DIRS = (
+    os.path.join(PROJECT_ROOT, 'static'),
+)
